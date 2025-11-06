@@ -121,7 +121,7 @@
 
 <main>
   <div class="cart-container" id="cartContainer">
-    <h1>Your Cart:</h1>
+    <h1></h1>
     <div id="cartItems"></div>
     <div class="cart-total" id="cartTotal">Total: $0</div>
     <button id="startCheckoutBtn">Checkout & Pay</button>
@@ -146,8 +146,26 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function renderCart() {
   const cartItemsContainer = document.getElementById("cartItems");
+  const cartTotalEl = document.getElementById("cartTotal");
+  const checkoutBtn = document.getElementById("startCheckoutBtn");
+
   cartItemsContainer.innerHTML = "";
   let total = 0;
+
+  // If cart is empty
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = `
+      <p style="font-size: 1.2rem; color: #555; margin-top: 1rem;">
+        Your cart is empty 🛒
+      </p>
+    `;
+    cartTotalEl.style.display = "none";
+    checkoutBtn.style.display = "none";
+    return;
+  }
+
+  cartTotalEl.style.display = "block";
+  checkoutBtn.style.display = "inline-block";
 
   cart.forEach((item, index) => {
     if (!item.quantity) item.quantity = 1;
