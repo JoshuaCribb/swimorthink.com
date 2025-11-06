@@ -42,7 +42,7 @@ main {
   display: grid;
   grid-template-columns: repeat(2, 222px);
   grid-template-rows: repeat(2, 222px);
-  gap: 3rem 5rem;
+  gap: 7rem 5rem;
   justify-content: center;
   text-align: center;
 }
