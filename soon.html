@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@swimorthink Store</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+  }
+
+  .main-image {
+    max-width: 90%;
+    height: auto;
+    border-radius: 10px;
+    
+  }
+</style>
+</head>
+<body>
+<header>
+  <a href="index.html">
+    <img src="assets/logo.gif" alt="@swimorthink logo" class="logo" />
+  </a>
+
+  <div class="header-banner2" id="account-banner">
+    <a href="login.html" id="account-link">Login</a>
+  </div>
+
+  <div class="header-banner">
+    <a href="cart.html">Shopping Cart</a>
+  </div>
+</header>
+
+<main>
+  <img src="assets/soon.png" alt="coming soon" class="main-image" />
+</main>
+
+<footer>
+  <p>© <span id="year"></span>. All Rights Reserved.</p>
+</footer>
+
+<script>
+  // Set current year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Account login logic
+  const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+  const accountLink = document.getElementById("account-link");
+  if (isLoggedIn) { 
+    accountLink.textContent = "My Account"; 
+    accountLink.href = "account.html"; 
+  } else {
+    accountLink.textContent = "Login";
+    accountLink.href = "login.html";
+  }
+</script>
+</body>
+</html>
