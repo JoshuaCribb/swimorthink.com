@@ -37,11 +37,11 @@ main {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, auto);
-  gap: 2rem;
+  gap: 1.5rem;
   justify-items: center;
   text-align: center;
   width: 100%;
-  max-width: 900px;
+  max-width: 500px; /* scaled for mobile */
 }
 
 .product {
@@ -54,8 +54,8 @@ main {
 .item {
   background: rgba(255, 255, 255, 0);
   border-radius: 0px;
-  width: 222px;
-  height: 222px;
+  width: 100%; /* full width of grid cell */
+  aspect-ratio: 1 / 1; /* keeps square shape */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,4 +89,20 @@ footer {
   background: rgb(202, 202, 202);
   color: #000;
   font-size: 0.9rem;
+}
+
+/* Mobile scaling for smaller screens */
+@media (max-width: 480px) {
+  .products {
+    max-width: 95%; /* fit smaller screens */
+    gap: 1rem;
+  }
+
+  .price {
+    font-size: 1.8rem;
+  }
+
+  .logo {
+    width: 180px;
+  }
 }
