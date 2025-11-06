@@ -7,60 +7,118 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
+<header>
+  <a href="index.html">
     <img src="assets/logo.gif" alt="@swimorthink logo" class="logo" />
-  </header>
+  </a>
 
-  <main>
-    <div class="products">
+ <div class="header-banner2" id="account-banner">
+    <a href="login.html" id="account-link">Login</a>
+  </div>
+
+  <div class="header-banner">
+    <a href="cart.html">Shopping Cart</a>
+  </div>
+
+  </div>
+</header>
+
+
+
+ <main>
+  <div class="products">
+    <a href="jacketpicker.html" class="product-link">
       <div class="product">
         <div class="item">
-          <img class="slideshow" src="assets/full zip01/blue.png" 
-               data-images="assets/full zip01/default.png,assets/full zip01/brown.png,assets/full zip01/green.png,assets/full zip01/tessy.png" />
+          <img
+            class="slideshow"
+            src="assets/full zip01/blue.png"
+            data-images="assets/full zip01/default.png,assets/full zip01/brown.png,assets/full zip01/green.png,assets/full zip01/tessy.png"
+            alt="Full Zip Jacket"
+          />
         </div>
         <p class="price">$275</p>
       </div>
+    </a>
 
+    <a href="index.html" class="product-link">
       <div class="product">
         <div class="item">
-          <img class="slideshow" src="assets/skully1/blue.png" 
-               data-images="assets/skully1/arc.png,assets/skully1/blue.png,assets/skully1/brown.png,assets/skully1/creme.png,assets/skully1/darkblu.png,assets/skully1/grape.png,assets/skully1/gray.png,assets/skully1/green.png,assets/skully1/hot pink.png,assets/skully1/light grey.png,assets/skully1/lightbr.png,assets/skully1/mandarin.png,assets/skully1/mint.png,assets/skully1/moss.png,assets/skully1/mud.png,assets/skully1/pink.png,assets/skully1/purp.png,assets/skully1/red.png,assets/skully1/shadow.png,assets/skully1/sky.png,assets/skully1/slime.png,assets/skully1/snow.png,assets/skully1/up.png,assets/skully1/yellow.png" />
+          <img
+            class="slideshow"
+            src="assets/skully1/blue.png"
+            data-images="assets/skully1/arc.png,assets/skully1/blue.png,assets/skully1/brown.png,assets/skully1/creme.png,assets/skully1/darkblu.png,assets/skully1/grape.png,assets/skully1/gray.png,assets/skully1/green.png,assets/skully1/hot pink.png,assets/skully1/light grey.png,assets/skully1/lightbr.png,assets/skully1/mandarin.png,assets/skully1/mint.png,assets/skully1/moss.png,assets/skully1/mud.png,assets/skully1/pink.png,assets/skully1/purp.png,assets/skully1/red.png,assets/skully1/shadow.png,assets/skully1/sky.png,assets/skully1/slime.png,assets/skully1/snow.png,assets/skully1/up.png,assets/skully1/yellow.png"
+            alt="Skully Hat"
+          />
         </div>
         <p class="price">$75</p>
       </div>
+    </a>
 
+    <a href="index.html" class="product-link">
       <div class="product">
         <div class="item">
-          <img class="slideshow" src="assets/pants1/3.png" data-images="assets/pants1/3.png" />
+          <img
+            class="slideshow"
+            src="assets/pants1/3.png"
+            data-images="assets/pants1/3.png"
+            alt="Pants"
+          />
         </div>
         <p class="price">$125</p>
       </div>
+    </a>
 
+    <a href="index.html" class="product-link">
       <div class="product">
         <div class="item">
-          <img class="slideshow" src="assets/slides1/green.png" data-images="assets/slides1/green.png,assets/slides1/green.png" />
+          <img
+            class="slideshow"
+            src="assets/slides1/green.png"
+            data-images="assets/slides1/green.png,assets/slides1/green.png"
+            alt="Slides"
+          />
         </div>
         <p class="price">$80</p>
       </div>
-    </div>
-  </main>
+    </a>
+  </div>
+</main>
 
-  <footer>
-    <p>© 2025. All Rights Reserved.</p>
-  </footer>
 
-  <script>
-    document.querySelectorAll(".slideshow").forEach(img => {
-      const images = img.dataset.images.split(",");
+<footer>
+  <p>© <span id="year"></span>. All Rights Reserved.</p>
+</footer>
 
-      function randomize() {
-        const randomIndex = Math.floor(Math.random() * images.length);
-        img.src = images[randomIndex];
-      }
+ <script>
+  document.querySelectorAll(".slideshow").forEach(img => {
+    const images = img.dataset.images.split(",");
 
-      randomize();
-      setInterval(randomize, 2000);
-    });
-  </script>
+    function randomize() {
+      const randomIndex = Math.floor(Math.random() * images.length);
+      img.src = images[randomIndex];
+    }
+
+   
+    randomize();
+
+   
+    setInterval(randomize, 2000);
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+      const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+  const accountLink = document.getElementById("account-link");
+  
+  if (isLoggedIn) {
+    accountLink.textContent = "My Account";
+    accountLink.href = "account.html";
+  } else {
+    accountLink.textContent = "Login";
+    accountLink.href = "login.html";
+  }
+
+  });
+</script>
+
 </body>
 </html>

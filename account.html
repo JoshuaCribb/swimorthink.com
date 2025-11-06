@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <a href="index.html">
+    <img src="assets/logo.gif" alt="@swimorthink logo" class="logo" />
+  </a>
+
+  <div class="header-banner">
+    <a href="cart.html">Shopping Cart</a>
+  </div>
+</header>
+
+<main>
+  <h1>My Account</h1>
+  <div id="account-info">Loading your information...</div>
+</main>
+
+<footer>
+  <p>© <span id="year"></span>. All Rights Reserved.</p>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  fetch('/account', { credentials: 'include' })
+    .then(res => {
+      if (!res.ok) throw new Error('Not logged in');
+      return res.json();
+    })
+    .then(user => {
+      document.getElementById('account-info').innerHTML = `
+        <p><strong>Name:</strong> ${user.display_name}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+      `;
+    })
+    .catch(() => {
+      window.location.href = 'login.html';
+    });
+</script>
+</body>
+</html>

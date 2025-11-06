@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login – @swimorthink</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      width: 100%;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 350px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .login-box button {
+      background: #222;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    .login-box button:hover {
+      background: #444;
+    }
+
+    .toggle-link {
+      color: #000;
+      text-decoration: none;
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .toggle-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">
+    <img src="assets/logo.gif" alt="@swimorthink logo" class="logo" />
+  </a>
+</header>
+
+<main>
+  <div class="login-container">
+    <div class="login-box" id="loginBox">
+      <h2>Login</h2>
+      <input type="email" id="loginEmail" placeholder="Email" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
+      <button onclick="login()">Login</button>
+      <a href="#" class="toggle-link" onclick="toggleForm()">Create an account</a>
+    </div>
+
+    <div class="login-box" id="signupBox" style="display:none;">
+      <h2>Sign Up</h2>
+      <input type="text" id="signupName" placeholder="Full Name" required />
+      <input type="email" id="signupEmail" placeholder="Email" required />
+      <input type="password" id="signupPassword" placeholder="Password" required />
+      <button onclick="signup()">Sign Up</button>
+      <a href="#" class="toggle-link" onclick="toggleForm()">Already have an account?</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© <span id="year"></span>. All Rights Reserved.</p>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  function toggleForm() {
+    const loginBox = document.getElementById("loginBox");
+    const signupBox = document.getElementById("signupBox");
+    loginBox.style.display = loginBox.style.display === "none" ? "block" : "none";
+    signupBox.style.display = signupBox.style.display === "none" ? "block" : "none";
+  }
+
+  function signup() {
+    const name = document.getElementById("signupName").value;
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+
+    if (!name || !email || !password) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    const user = { name, email, password };
+    localStorage.setItem("user", JSON.stringify(user));
+    alert("Account created successfully! You can now log in.");
+    toggleForm();
+  }
+
+  function login() {
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!savedUser) {
+      alert("No account found. Please sign up first.");
+      return;
+    }
+
+    if (savedUser.email === email && savedUser.password === password) {
+      localStorage.setItem("loggedIn", "true");
+      alert("Login successful!");
+      window.location.href = "account.html";
+    } else {
+      alert("Incorrect email or password.");
+    }
+  }
+</script>
+</body>
+</html>
