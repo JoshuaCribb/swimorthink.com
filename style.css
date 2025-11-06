@@ -42,7 +42,7 @@ main {
   display: grid;
   grid-template-columns: repeat(2, 222px);
   grid-template-rows: repeat(2, 222px);
-  gap:7rem 5rem;
+  gap: 7rem 5rem;
   justify-content: center;
   text-align: center;
 }
@@ -99,7 +99,7 @@ footer {
   width: 100%;
 }
 
-/* MOBILE SCALING */
+
 @media (max-width: 480px) {
   .products {
     transform: scale(0.7);
@@ -111,4 +111,11 @@ footer {
     font-size: 1.8rem;
   }
 
+  .logo {
+    width: 260px;      
+    max-width: 260px;   
+    height: auto;
+    display: block;
+    margin: 0 auto;     
+  }
 }
