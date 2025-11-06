@@ -22,7 +22,7 @@ header {
 }
 
 .logo {
-  width: 260px;       /* original desktop size */
+  width: 260px;
   max-width: 80%;
   height: auto;
   display: block;
@@ -42,7 +42,7 @@ main {
   display: grid;
   grid-template-columns: repeat(2, 222px);
   grid-template-rows: repeat(2, 222px);
-  gap: 7rem 5rem;
+  gap:7rem 5rem;
   justify-content: center;
   text-align: center;
 }
@@ -54,10 +54,10 @@ main {
 }
 
 .item {
-  width: 222px;
-  height: 222px;
   background: rgba(255, 255, 255, 0);
   border-radius: 0px;
+  width: 222px;
+  height: 222px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +65,7 @@ main {
   font-size: 1.1rem;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  overflow: hidden;
+  overflow: hidden; 
 }
 
 .item:hover {
@@ -74,13 +74,13 @@ main {
 }
 
 .item img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: auto;         
+  height: auto;        
+  max-width: 100%;    
+  max-height: 100%;    
   display: block;
-  margin: auto;
+  margin: auto;        
+  object-fit: contain;
 }
 
 .price {
@@ -112,10 +112,8 @@ footer {
   }
 
   .logo {
-    width: 200%;      /* double the desktop size */
-    max-width: none;  /* remove restriction */
+    width: 360px; 
+    max-width: 95%;
     height: auto;
-    display: block;
-    margin: 0 auto;
   }
 }
