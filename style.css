@@ -11,18 +11,22 @@ body {
   min-height: 100vh;
   background: rgb(202, 202, 202);
   color: #333;
+  align-items: center; /* center content horizontally */
 }
 
 header {
   text-align: center;
   padding: 0.25rem 0;
   background: rgb(202, 202, 202);
+  width: 100%;
 }
 
 .logo {
   width: 260px;
   max-width: 80%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 main {
@@ -31,31 +35,29 @@ main {
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  width: 100%;
 }
 
 .products {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, auto);
-  gap: 1.5rem;
-  justify-items: center;
+  grid-template-columns: repeat(2, 222px);
+  grid-template-rows: repeat(2, 222px);
+  gap: 3rem 5rem;
+  justify-content: center;
   text-align: center;
-  width: 100%;
-  max-width: 500px; /* scaled for mobile */
 }
 
 .product {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 }
 
 .item {
   background: rgba(255, 255, 255, 0);
   border-radius: 0px;
-  width: 100%; /* full width of grid cell */
-  aspect-ratio: 1 / 1; /* keeps square shape */
+  width: 222px;
+  height: 222px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,13 +91,15 @@ footer {
   background: rgb(202, 202, 202);
   color: #000;
   font-size: 0.9rem;
+  width: 100%;
 }
 
-/* Mobile scaling for smaller screens */
+/* MOBILE SCALING */
 @media (max-width: 480px) {
   .products {
-    max-width: 95%; /* fit smaller screens */
-    gap: 1rem;
+    transform: scale(0.7); /* shrink entire grid */
+    transform-origin: top center; /* keep centered */
+    gap: 2rem 3rem;
   }
 
   .price {
