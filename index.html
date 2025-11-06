@@ -15,19 +15,21 @@
     <div class="products">
       <div class="product">
         <div class="item">
-          <img class="slideshow" src="assets/full zip01/blue.png" data-images="assets/full zip01/default.png,assets/full zip01/brown.png,assets/full zip01/green.png,assets/full zip01/tessy.png" />
+          <img class="slideshow" src="assets/full zip01/blue.png" 
+               data-images="assets/full zip01/default.png,assets/full zip01/brown.png,assets/full zip01/green.png,assets/full zip01/tessy.png" />
         </div>
         <p class="price">$275</p>
       </div>
 
       <div class="product">
         <div class="item">
-          <img class="slideshow" src="assets/skully1/blue.png" data-images="assets/skully1/arc.png,assets/skully1/blue.png,assets/skully1/brown.png,assets/skully1/creme.png,assets/skully1/darkblu.png,assets/skully1/grape.png,assets/skully1/gray.png,assets/skully1/green.png,assets/skully1/hot pink.png,assets/skully1/light grey.png,assets/skully1/lightbr.png,assets/skully1/mandarin.png,assets/skully1/mint.png,assets/skully1/moss.png,assets/skully1/mud.png,assets/skully1/pink.png,assets/skully1/purp.png,assets/skully1/red.png,assets/skully1/shadow.png,assets/skully1/sky.png,assets/skully1/slime.png,assets/skully1/snow.png,assets/skully1/up.png,assets/skully1/yellow.png" />
+          <img class="slideshow" src="assets/skully1/blue.png" 
+               data-images="assets/skully1/arc.png,assets/skully1/blue.png,assets/skully1/brown.png,assets/skully1/creme.png,assets/skully1/darkblu.png,assets/skully1/grape.png,assets/skully1/gray.png,assets/skully1/green.png,assets/skully1/hot pink.png,assets/skully1/light grey.png,assets/skully1/lightbr.png,assets/skully1/mandarin.png,assets/skully1/mint.png,assets/skully1/moss.png,assets/skully1/mud.png,assets/skully1/pink.png,assets/skully1/purp.png,assets/skully1/red.png,assets/skully1/shadow.png,assets/skully1/sky.png,assets/skully1/slime.png,assets/skully1/snow.png,assets/skully1/up.png,assets/skully1/yellow.png" />
         </div>
         <p class="price">$75</p>
       </div>
 
- <div class="product">
+      <div class="product">
         <div class="item">
           <img class="slideshow" src="assets/pants1/3.png" data-images="assets/pants1/3.png" />
         </div>
@@ -40,30 +42,25 @@
         </div>
         <p class="price">$80</p>
       </div>
-
-  
+    </div>
   </main>
 
   <footer>
     <p>© 2025. All Rights Reserved.</p>
   </footer>
 
- <script>
-  document.querySelectorAll(".slideshow").forEach(img => {
-    const images = img.dataset.images.split(",");
+  <script>
+    document.querySelectorAll(".slideshow").forEach(img => {
+      const images = img.dataset.images.split(",");
 
-    function randomize() {
-      const randomIndex = Math.floor(Math.random() * images.length);
-      img.src = images[randomIndex];
-    }
+      function randomize() {
+        const randomIndex = Math.floor(Math.random() * images.length);
+        img.src = images[randomIndex];
+      }
 
-   
-    randomize();
-
-   
-    setInterval(randomize, 2000);
-  });
-</script>
-
+      randomize();
+      setInterval(randomize, 2000);
+    });
+  </script>
 </body>
 </html>
