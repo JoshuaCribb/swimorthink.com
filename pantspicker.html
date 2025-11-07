@@ -107,9 +107,6 @@
 <body>
 <header>
   <a href="index.html"><img src="assets/logo.gif" class="logo" alt="@swimorthink logo"></a>
-  <div class="header-banner2" id="account-banner">
-    <a href="login.html" id="account-link">Login</a>
-  </div>
   <div class="header-banner"><a href="cart.html">Shopping Cart</a></div>
 </header>
 
@@ -174,7 +171,7 @@ let selectedSize = "M";
 let selectedView = "front";
 let price = 125;
 
-// Update pants preview in frame
+
 function updatePantsImage() {
   const selectedOption = Array.from(colorPicker.children)
     .find(c => c.dataset.color === selectedColor);
@@ -183,7 +180,7 @@ function updatePantsImage() {
     : selectedOption.dataset.srcBack;
 }
 
-// Color selection
+
 colorPicker.querySelectorAll(".color-option").forEach(option => {
   option.addEventListener("click", () => {
     selectedColor = option.dataset.color;
@@ -191,7 +188,7 @@ colorPicker.querySelectorAll(".color-option").forEach(option => {
   });
 });
 
-// Size selection
+
 sizePicker.querySelectorAll("button").forEach(button => {
   button.addEventListener("click", () => {
     selectedSize = button.dataset.size;
@@ -204,7 +201,7 @@ sizePicker.querySelectorAll("button").forEach(button => {
   });
 });
 
-// View selection
+
 viewPicker.querySelectorAll("button").forEach(button => {
   button.addEventListener("click", () => {
     selectedView = button.dataset.view;
@@ -214,7 +211,7 @@ viewPicker.querySelectorAll("button").forEach(button => {
   });
 });
 
-// Toast message
+
 function showToast(message) {
   const toast = document.createElement('div');
   toast.textContent = message;
@@ -239,7 +236,6 @@ function showToast(message) {
   }, 2000);
 }
 
-// Add to cart
 addToCartBtn.addEventListener("click", () => {
   const selectedOption = Array.from(colorPicker.children)
     .find(c => c.dataset.color === selectedColor);

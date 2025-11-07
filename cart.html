@@ -90,9 +90,6 @@
   <div class="header-banner" id="account-banner">
     <a href="index.html" id="account-link">Home</a>
   </div>
-  <div class="header-banner2" id="account-banner">
-    <a href="login.html" id="account-link">Login</a>
-  </div>
 </header>
 
 <main>
@@ -108,13 +105,13 @@
   <p>© <span id="year"></span>. All Rights Reserved.</p>
 </footer>
 
-<!-- Stripe.js -->
+
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Show "My Account" if logged in
+
 const isLoggedIn = localStorage.getItem("loggedIn") === "true";
 const accountLink = document.getElementById("account-link");
 if (isLoggedIn) {
@@ -124,7 +121,7 @@ if (isLoggedIn) {
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Initialize Stripe with fake placeholder key
+
 const stripe = Stripe("pk_live_FAKE_KEY_REPLACE_ME");
 
 function renderCart() {
