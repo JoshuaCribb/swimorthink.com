@@ -9,87 +9,24 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/iconapple.png">
   <link rel="stylesheet" href="style.css" />
   <style>
-    .cart-container {
-      width: 90%;
-      max-width: 800px;
-      margin: 2rem auto;
-      text-align: center;
-    }
-    .cart-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #fff;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      flex-wrap: wrap;
-    }
-    .cart-item img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-    }
-    .cart-item-details {
-      flex: 1;
-      margin-left: 1rem;
-      text-align: left;
-      min-width: 150px;
-    }
+    .cart-container { width: 90%; max-width: 800px; margin: 2rem auto; text-align: center; }
+    .cart-item { display: flex; align-items: center; justify-content: space-between; background: #fff; margin-bottom: 1rem; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); flex-wrap: wrap; }
+    .cart-item img { width: 80px; height: 80px; object-fit: contain; }
+    .cart-item-details { flex: 1; margin-left: 1rem; text-align: left; min-width: 150px; }
     .cart-item-details p { margin: 0.25rem 0; }
-    .remove-btn {
-      background: #ff5555;
-      color: #fff;
-      border: none;
-      padding: 0.3rem 0.6rem;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 0.5rem;
-    }
+    .remove-btn { background: #ff5555; color: #fff; border: none; padding: 0.3rem 0.6rem; border-radius: 5px; cursor: pointer; margin-top: 0.5rem; }
     .remove-btn:hover { background: #ff2222; }
-    .cart-total {
-      text-align: right;
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-top: 1rem;
-    }
-    #startCheckoutBtn {
-      display: block;
-      margin: 1.5rem auto;
-      padding: 0.8rem 1.5rem;
-      font-size: 1.2rem;
-      background: #6772e5;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+    .cart-total { text-align: right; font-size: 1.5rem; font-weight: bold; margin-top: 1rem; }
+    #startCheckoutBtn { display: block; margin: 1.5rem auto; padding: 0.8rem 1.5rem; font-size: 1.2rem; background: #6772e5; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
     #startCheckoutBtn:hover { background: #5469d4; }
-    .quantity-input {
-      width: 50px;
-      padding: 3px 5px;
-      margin-left: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-    @media (max-width: 480px) {
-      .cart-item { flex-direction: column; align-items: flex-start; }
-      .cart-item-details { margin-left: 0; margin-top: 0.5rem; }
-      #startCheckoutBtn { width: 90%; font-size: 1rem; }
-    }
+    .quantity-input { width: 50px; padding: 3px 5px; margin-left: 5px; border-radius: 5px; border: 1px solid #ccc; text-align: center; }
+    @media (max-width: 480px) { .cart-item { flex-direction: column; align-items: flex-start; } .cart-item-details { margin-left: 0; margin-top: 0.5rem; } #startCheckoutBtn { width: 90%; font-size: 1rem; } }
   </style>
 </head>
 
 <body>
 <header>
-  <a href="index.html">
-    <img src="assets/logo.gif" alt="@swimorthink logo" class="logo" />
-  </a>
-  <div class="header-banner" id="account-banner">
-    <a href="index.html" id="account-link">Home</a>
-  </div>
+  <a href="index.html"><img src="assets/logo.gif" alt="@swimorthink logo" class="logo" /></a>
 </header>
 
 <main>
@@ -104,15 +41,15 @@
   <p>© <span id="year"></span>. All Rights Reserved.</p>
 </footer>
 
-
 <script src="https://js.stripe.com/v3/"></script>
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-// Use your Stripe publishable key here
 const stripe = Stripe("pk_live_51SQdhpQmVjRaXaSguVowcSf46mwucA7RnD5GGG5DUN8j9cdVNssaGvoZZ3fsskSCsGHKT3gIxIIAn23gzppOKYbn0014WgzAjT");
+
+// Use your Netlify deploy URL here
+const SITE_URL = "https://musical-semifreddo-762614.netlify.app";
 
 function renderCart() {
   const cartItemsContainer = document.getElementById("cartItems");
@@ -139,7 +76,7 @@ function renderCart() {
     const cartItem = document.createElement("div");
     cartItem.className = "cart-item";
     cartItem.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" />
+      <img src="${SITE_URL}/assets/full-zip01/${item.color.toLowerCase()}.png" alt="${item.name}" />
       <div class="cart-item-details">
         <p><strong>${item.name}</strong></p>
         <p>Color: ${item.color || 'Default'}</p>
@@ -207,6 +144,5 @@ document.getElementById("startCheckoutBtn").addEventListener("click", async () =
   }
 });
 </script>
-
 </body>
 </html>
