@@ -150,6 +150,13 @@
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
+const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+const accountLink = document.getElementById("account-link");
+if (isLoggedIn) { 
+  accountLink.textContent = "My Account"; 
+  accountLink.href = "account.html"; 
+}
+
 const jacketImage = document.getElementById("jacketImage");
 const colorPicker = document.getElementById("colorPicker");
 const sizePicker = document.getElementById("sizePicker");
@@ -236,7 +243,7 @@ addToCartBtn.addEventListener("click", () => {
     name: "Full Zip Jacket",
     color: selectedColor,
     size: selectedSize,
-    image: `assets/full zip01/${selectedColor.toLowerCase()}.png`, // your chosen image
+    image: `assets/full zip01/${selectedColor.toLowerCase()}.png`, // representative image
     price: price
   });
 
