@@ -6,12 +6,17 @@ export async function handler(event) {
   try {
     const { items } = JSON.parse(event.body);
 
-   
+    // Map items for Stripe and include public image URLs
     const lineItems = items.map((item) => ({
       price_data: {
         currency: 'usd',
-        product_data: { name: item.name },
-        unit_amount: Math.round(item.price * 100), 
+        product_data: { 
+          name: item.name,
+          images: [
+            `https://musical-semifreddo-762614.netlify.app/assets/full-zip01/${item.color.toLowerCase()}.png`
+          ]
+        },
+        unit_amount: Math.round(item.price * 100),
       },
       quantity: item.quantity || 1,
     }));
