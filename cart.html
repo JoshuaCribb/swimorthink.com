@@ -106,21 +106,12 @@
 
 
 <script src="https://js.stripe.com/v3/"></script>
-
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-
-const isLoggedIn = localStorage.getItem("loggedIn") === "true";
-const accountLink = document.getElementById("account-link");
-if (isLoggedIn) {
-  accountLink.textContent = "My Account";
-  accountLink.href = "account.html";
-}
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-
+// Use your Stripe publishable key here
 const stripe = Stripe("pk_live_51SQdhpQmVjRaXaSguVowcSf46mwucA7RnD5GGG5DUN8j9cdVNssaGvoZZ3fsskSCsGHKT3gIxIIAn23gzppOKYbn0014WgzAjT");
 
 function renderCart() {
@@ -132,10 +123,7 @@ function renderCart() {
   let total = 0;
 
   if (cart.length === 0) {
-    cartItemsContainer.innerHTML = `
-      <p style="font-size:1.2rem;color:#555;margin-top:1rem;">
-        Your cart is empty 🛒
-      </p>`;
+    cartItemsContainer.innerHTML = `<p style="font-size:1.2rem;color:#555;margin-top:1rem;">Your cart is empty 🛒</p>`;
     cartTotalEl.style.display = "none";
     checkoutBtn.style.display = "none";
     return;
@@ -167,7 +155,7 @@ function renderCart() {
     cartItemsContainer.appendChild(cartItem);
   });
 
-  document.getElementById("cartTotal").textContent = `Total: $${(Math.round(total * 100) / 100).toFixed(2)}`;
+  cartTotalEl.textContent = `Total: $${(Math.round(total * 100) / 100).toFixed(2)}`;
 
   document.querySelectorAll(".quantity-input").forEach(input => {
     input.addEventListener("change", e => {
@@ -196,7 +184,8 @@ document.getElementById("startCheckoutBtn").addEventListener("click", async () =
   }
 
   try {
-    const response = await fetch("/create-checkout-session", {
+    // ✅ Netlify function URL
+    const response = await fetch("/.netlify/functions/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ items: cart })
@@ -218,5 +207,6 @@ document.getElementById("startCheckoutBtn").addEventListener("click", async () =
   }
 });
 </script>
+
 </body>
 </html>
