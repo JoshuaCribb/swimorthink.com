@@ -49,11 +49,13 @@
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-const SITE_URL = "https://musical-semifreddo-762614.netlify.app";
+// Automatically get your Netlify URL
+const SITE_URL = "https://swimorthink.netlify.app"; 
 const stripe = Stripe("pk_live_51SQdhpQmVjRaXaSguVowcSf46mwucA7RnD5GGG5DUN8j9cdVNssaGvoZZ3fsskSCsGHKT3gIxIIAn23gzppOKYbn0014WgzAjT");
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Render cart
+// Render the cart
 function renderCart() {
   const container = document.getElementById("cartItems");
   const totalEl = document.getElementById("cartTotal");
@@ -76,10 +78,13 @@ function renderCart() {
     if (!item.quantity) item.quantity = 1;
     total += item.price * item.quantity;
 
+    // Force public image URL from Netlify for both cart and Stripe
+    const imageUrl = `${SITE_URL}/assets/full-zip01/${item.color.toLowerCase()}.png`;
+
     const div = document.createElement("div");
     div.className = "cart-item";
     div.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" />
+      <img src="${imageUrl}" alt="${item.name}" />
       <div class="cart-item-details">
         <p><strong>${item.name}</strong></p>
         <p>Color: ${item.color}</p>
@@ -108,6 +113,7 @@ function renderCart() {
   });
 }
 
+// Remove item
 function removeItem(index) {
   cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -116,7 +122,7 @@ function removeItem(index) {
 
 renderCart();
 
-// Checkout
+// Checkout with Netlify function
 document.getElementById("startCheckoutBtn").addEventListener("click", async () => {
   if (!cart.length) {
     alert("Your cart is empty!");
@@ -124,6 +130,7 @@ document.getElementById("startCheckoutBtn").addEventListener("click", async () =
   }
 
   try {
+    // Send cart items to Netlify function
     const response = await fetch("/.netlify/functions/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -136,8 +143,10 @@ document.getElementById("startCheckoutBtn").addEventListener("click", async () =
       return;
     }
 
+    // Redirect to Stripe Checkout
     const result = await stripe.redirectToCheckout({ sessionId: data.sessionId });
     if (result.error) alert(result.error.message);
+
   } catch (err) {
     console.error(err);
     alert("Checkout failed: " + err.message);
