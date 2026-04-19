@@ -132,30 +132,31 @@ footer {
   display: block;
 }
 
+
 @media (max-width: 480px) {
 
   html, body {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
   }
 
   .products {
-    gap: 1.5rem;
-    justify-content: center;
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
   }
 
   .item {
-    width: 300px !important;
-    height: 300px !important;
+    width: 280px !important;
+    height: 280px !important;
   }
 
   .slideshow {
-    width: 85% !important;
+    width: 75% !important;
     height: auto !important;
     object-fit: contain;
     transform: scale(1.05);
   }
 
   .price {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 }
