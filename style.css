@@ -45,14 +45,6 @@ header {
   letter-spacing: 1px;
 }
 
-.header-banner a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.header-banner a:hover {
-  text-decoration: underline;
-}
 .header-banner a,
 .header-banner2 a {
   color: #fff;
@@ -140,34 +132,25 @@ footer {
   display: block;
 }
 
+
 @media (max-width: 480px) {
+
   .products {
-    transform: scale(0.7);
-    transform-origin: top center;
-    gap: 2rem 3rem;
+    gap: 3rem;
   }
-
-  .price {
-    font-size: 1.8rem;
-  }
-
-  .logo {
-    width: 360px;
-    max-width: 95%;
-    height: auto;
-  }
-}
-@media (max-width: 480px) {
 
   .item {
-    width: 260px;
-    height: 260px;
+    width: 340px;
+    height: 340px;
   }
 
   .slideshow {
-    width: 65%;
+    width: 70%;
     height: auto;
     object-fit: contain;
   }
 
+  .price {
+    font-size: 1.6rem;
+  }
 }
