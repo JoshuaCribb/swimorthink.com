@@ -126,31 +126,25 @@ footer {
 }
 
 
+
 @media (max-width: 480px) {
 
-  body {
-    overflow-x: hidden;
-  }
-
-
   .products {
-    gap: .5rem;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1rem;
+    padding: 0 10px; 
   }
-
 
   .item {
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    height: auto;
   }
-
 
   .slideshow {
-    width: 75%;
+    width: 100%;
     height: auto;
-    object-fit: contain;
   }
 
-  
   .price {
     font-size: 1.5rem;
   }
