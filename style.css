@@ -132,25 +132,31 @@ footer {
   display: block;
 }
 
-
+/* ===================== MOBILE FIX ===================== */
 @media (max-width: 480px) {
 
-  .products {
-    gap: 3rem;
+  /* removes ugly bottom scroll bar */
+  body {
+    overflow-x: hidden;
   }
 
+  .products {
+    gap: 2.5rem;
+  }
+
+  /* THIS is the actual size correction */
   .item {
-    width: 340px;
-    height: 340px;
+    width: 280px !important;
+    height: 280px !important;
   }
 
   .slideshow {
-    width: 70%;
-    height: auto;
+    width: 70% !important;
+    height: auto !important;
     object-fit: contain;
   }
 
   .price {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 }
