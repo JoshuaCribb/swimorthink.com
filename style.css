@@ -11,6 +11,7 @@ body {
   min-height: 100vh;
   background: rgb(202, 202, 202);
   color: #333;
+  align-items: center;
 }
 
 header {
@@ -44,6 +45,14 @@ header {
   letter-spacing: 1px;
 }
 
+.header-banner a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header-banner a:hover {
+  text-decoration: underline;
+}
 .header-banner a,
 .header-banner2 a {
   color: #fff;
@@ -56,19 +65,20 @@ header {
 }
 
 main {
-  flex: 1;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
   width: 100%;
 }
 
 .products {
   display: grid;
-  grid-template-columns: 555px;
-  grid-template-rows: 555px;
+  grid-template-columns: repeat(2, 222px);
+  grid-template-rows: repeat(2, 222px);
+  gap: 7rem 5rem;
   justify-content: center;
-  align-content: center;
   text-align: center;
 }
 
@@ -81,8 +91,8 @@ main {
 .item {
   background: rgba(255, 255, 255, 0);
   border-radius: 0px;
-  width: 555px;
-  height: 555px;
+  width: 500px;
+  height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -133,7 +143,7 @@ footer {
 @media (max-width: 480px) {
   .products {
     transform: scale(0.7);
-    transform-origin: center;
+    transform-origin: top center;
     gap: 2rem 3rem;
   }
 
