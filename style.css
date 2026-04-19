@@ -132,28 +132,27 @@ footer {
   display: block;
 }
 
-/* ===================== MOBILE FIX ===================== */
 @media (max-width: 480px) {
 
-  /* removes ugly bottom scroll bar */
-  body {
+  html, body {
     overflow-x: hidden;
   }
 
   .products {
-    gap: 2.5rem;
+    gap: 1.5rem;
+    justify-content: center;
   }
 
-  /* THIS is the actual size correction */
   .item {
-    width: 280px !important;
-    height: 280px !important;
+    width: 300px !important;
+    height: 300px !important;
   }
 
   .slideshow {
-    width: 70% !important;
+    width: 85% !important;
     height: auto !important;
     object-fit: contain;
+    transform: scale(1.05);
   }
 
   .price {
