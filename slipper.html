@@ -208,7 +208,7 @@ addToCartBtn.addEventListener("click", () => {
 
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.push({
-    name: "Slipper",
+    name: "slipper",
     color: selectedColor,
     size: selectedSize,
     image: selectedOption.dataset.src,
@@ -216,7 +216,7 @@ addToCartBtn.addEventListener("click", () => {
   });
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  showToast(`${selectedColor} Slipper (Size ${selectedSize}) added to cart!`);
+  showToast(`${selectedColor} slipper (Size ${selectedSize}) added to cart!`);
 });
 </script>
 </body>
