@@ -108,29 +108,30 @@
     <p class="price" id="hatPrice">$21</p>
 
     <div class="color-picker" id="colorPicker">
-      <div class="color-option" style="background-color: rgb(0, 0, 0);" data-color="Black" data-src="assets/slides1/black.png"></div>
-      <div class="color-option" style="background-color: pink;" data-color="Gray" data-src="assets/slipper/superdemo.png"></div>
-      <div class="color-option" style="background-color: rgb(26, 26, 122);" data-color="Sky" data-src="assets/slides1/sky.png"></div>
-      <div class="color-option" style="background-color: rgb(107, 107, 107);" data-color="Black" data-src="assets/slides1/black.png"></div>
+      <div class="color-option" style="background-color: rgb(0, 0, 0);" data-color="Black" data-src="assets/blackslipper.png"></div>
+      <div class="color-option" style="background-color: rgb(141, 141, 141);" data-color="Gray" data-src="assets/grayslipper.png"></div>
+      <div class="color-option" style="background-color: rgb(26, 26, 122);" data-color="Blue" data-src="assets/blueslipper.png"></div>
+      <div class="color-option" style="background-color: pink;" data-color="Pink" data-src="assets/pinkslipper.png"></div>
+      <div class="color-option" style="background-color: rgb(255, 255, 255);" data-color="White" data-src="assets/whiteslipper.png"></div>
     </div>
 
   
-    <div class="size-picker">
-      <label for="sizeSelect">Size:</label>
-      <select id="sizeSelect" class="size-select">
-        <option value="" disabled selected>Select Size</option>
-        <option>M5 W6.5 EU38</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
-        <option>11</option>
-        <option>12</option>
-        <option>13</option>
-        <option>14</option>
-      </select>
-    </div>
+   <div class="size-picker">
+  <label for="sizeSelect">Size:</label>
+  <select id="sizeSelect" class="size-select">
+    <option value="" disabled selected>Select Size</option>
+    <option>M5 W6.5 EU38</option>
+    <option>M6 W7.5 EU39</option>
+    <option>M7 W8.5 EU40</option>
+    <option>M8 W9.5 EU41</option>
+    <option>M9 W10.5 EU42</option>
+    <option>M10 W11.5 EU43</option>
+    <option>M11 W12.5 EU44</option>
+    <option>M12 W13.5 EU45</option>
+    <option>M13 W14.5 EU46</option>
+    <option>M14 W15.5 EU47</option>
+  </select>
+</div>
 
     <button id="addToCartBtn">Add to Cart</button>
   </div>
@@ -150,7 +151,7 @@ if (isLoggedIn) {
   accountLink.href = "account.html"; 
 }
 
-const hatImage = document.getElementById("hatImage");
+const hatImage = document.getElementById("slipper");
 const colorPicker = document.getElementById("colorPicker");
 const addToCartBtn = document.getElementById("addToCartBtn");
 const sizeSelect = document.getElementById("sizeSelect");
