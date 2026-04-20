@@ -157,7 +157,7 @@ const addToCartBtn = document.getElementById("addToCartBtn");
 const sizeSelect = document.getElementById("sizeSelect");
 
 let selectedColor = "Gray";
-let price = 65;
+let price = 21;
 
 function updateHatImage() {
   const selectedOption = Array.from(colorPicker.children)
@@ -208,7 +208,7 @@ addToCartBtn.addEventListener("click", () => {
 
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.push({
-    name: "Slides",
+    name: "Slipper",
     color: selectedColor,
     size: selectedSize,
     image: selectedOption.dataset.src,
@@ -216,7 +216,7 @@ addToCartBtn.addEventListener("click", () => {
   });
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  showToast(`${selectedColor} Slides (Size ${selectedSize}) added to cart!`);
+  showToast(`${selectedColor} Slipper (Size ${selectedSize}) added to cart!`);
 });
 </script>
 </body>
