@@ -5,11 +5,9 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/icon16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/iconapple.png">
 
-  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000">
 
-  <!-- iOS App Mode -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="swimorthink">
@@ -54,15 +52,21 @@
 </footer>
 
 <script>
-document.querySelectorAll(".slideshow").forEach(img => {
-  const images = img.dataset.images.split(",");
-  let index = 0;
-  setInterval(() => {
-    index = (index + 1) % images.length;
-    img.src = images[index];
-  }, 2000);
+document.addEventListener("DOMContentLoaded", () => {
+  const slideshows = document.querySelectorAll(".slideshow");
+
+  slideshows.forEach(img => {
+    const images = img.dataset.images.split(",");
+    let index = 0;
+
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      img.src = images[index];
+    }, 2000);
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
 });
-document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 <script src="pwa-nav.js"></script>
