@@ -59,8 +59,9 @@
     if (!isStandalone && resolved.pathname === location.pathname) return;
 
     e.preventDefault();
-    history.pushState({}, '', resolved.href);
-    loadPage(resolved.href);
+
+    // ✅ FORCE FULL PAGE RELOAD
+    window.location.href = resolved.href;
   });
 
   window.addEventListener('popstate', function () {
