@@ -137,12 +137,13 @@ footer {
   }
 
   .product {
-    max-width: 120px;  
+    max-width: 140px;  
     width: 100%;
   }
 
   .item {
     width: 100%;
+    height: auto;            /* THIS was missing */
     aspect-ratio: 1 / 1;
   }
 
