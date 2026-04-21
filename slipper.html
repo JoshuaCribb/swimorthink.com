@@ -16,7 +16,8 @@
   <link rel="apple-touch-icon" href="/assets/icon192.png">
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
   <title>@swimorthink</title>
   <link rel="stylesheet" href="style.css" />
 
@@ -107,17 +108,20 @@
 </head>
 
 <body>
+
 <header>
-  <a href="index.html">
+  <a href="/index.html">
     <img src="assets/logo.gif" class="logo" alt="@swimorthink logo">
   </a>
+
   <div class="header-banner">
-    <a href="cart.html">Shopping Cart</a>
+    <a href="/cart.html">Shopping Cart</a>
   </div>
 </header>
 
 <main>
   <div class="picker-container">
+
     <div class="hat-frame">
       <img id="slipper" class="hat-image" src="assets/cremeslipper.png" alt="slipper">
     </div>
@@ -148,6 +152,7 @@
     </div>
 
     <button id="addToCartBtn">Add to Cart</button>
+
   </div>
 </main>
 
@@ -212,8 +217,8 @@ addToCartBtn.addEventListener("click", () => {
 
   const selectedSize = sizeSelect.value;
 
-  if (!selectedSize) {
-    showToast("Please select a size first!");
+  if (!selectedOption || !selectedSize) {
+    showToast("Please select color and size first!");
     return;
   }
 
