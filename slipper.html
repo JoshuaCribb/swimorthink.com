@@ -5,11 +5,9 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/icon16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/iconapple.png">
 
-  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000">
 
-  <!-- iOS App Mode -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="swimorthink">
@@ -40,17 +38,17 @@
       <img id="slipper" class="hat-image" src="assets/cremeslipper.png" alt="slipper">
     </div>
 
-    <p class="price" id="hatPrice">$28</p>
+    <p class="price">$28</p>
 
     <div class="color-picker" id="colorPicker">
-      <div class="color-option" style="background-color: rgb(255,255,255);" data-color="creme" data-src="assets/cremeslipper.png"></div>
-      <div class="color-option" style="background-color: pink;" data-color="pink" data-src="assets/pinkslipperfront.png"></div>
-      <div class="color-option" style="background-color: rgb(0,0,0);" data-color="black" data-src="assets/blackslipperside.png"></div>
+      <div class="color-option" data-color="creme" style="background:#fff;" data-src="assets/cremeslipper.png"></div>
+      <div class="color-option" data-color="pink" style="background:pink;" data-src="assets/pinkslipperfront.png"></div>
+      <div class="color-option" data-color="black" style="background:#000;" data-src="assets/blackslipperside.png"></div>
     </div>
 
     <div class="size-picker">
       <label for="sizeSelect">Size:</label>
-      <select id="sizeSelect" class="size-select">
+      <select id="sizeSelect">
         <option value="" disabled selected>Select Size</option>
         <option>M5 W6.5 EU38</option>
         <option>M6 W7.5 EU39</option>
@@ -75,72 +73,67 @@
 </footer>
 
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+document.addEventListener("click", function (e) {
 
-window.initSlipperPage = function() {
-  var hatImage = document.getElementById("slipper");
-  var colorPicker = document.getElementById("colorPicker");
-  var addToCartBtn = document.getElementById("addToCartBtn");
-  var sizeSelect = document.getElementById("sizeSelect");
+  const color = e.target.closest(".color-option");
 
-  if (!hatImage || !colorPicker || !addToCartBtn || !sizeSelect) return;
+  if (color) {
+    const img = document.getElementById("slipper");
+    const picker = document.getElementById("colorPicker");
 
-  var selectedColor = "creme";
-  var price = 28;
+    if (!img || !picker) return;
 
-  colorPicker.addEventListener("click", function(e) {
-    var option = e.target.closest(".color-option");
-    if (!option) return;
-    selectedColor = option.dataset.color;
-    hatImage.src = option.dataset.src;
-  });
+    img.src = color.dataset.src;
 
-  function showToast(message) {
-    var toast = document.createElement("div");
-    toast.textContent = message;
-    toast.style.position = "fixed";
-    toast.style.top = "20px";
-    toast.style.left = "50%";
-    toast.style.transform = "translateX(-50%)";
-    toast.style.background = "#6772e5";
-    toast.style.color = "#fff";
-    toast.style.padding = "10px 20px";
-    toast.style.borderRadius = "8px";
-    toast.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
-    toast.style.zIndex = "1000";
-    toast.style.opacity = "0";
-    toast.style.transition = "opacity 0.3s";
-    document.body.appendChild(toast);
-    setTimeout(function() { toast.style.opacity = "1"; }, 50);
-    setTimeout(function() {
-      toast.style.opacity = "0";
-      setTimeout(function() { toast.remove(); }, 300);
-    }, 2000);
+    picker.querySelectorAll(".color-option").forEach(function (el) {
+      el.classList.remove("active");
+    });
+
+    color.classList.add("active");
+
+    return;
   }
 
-  addToCartBtn.addEventListener("click", function() {
-    var selectedSize = sizeSelect.value;
-    if (!selectedColor || !selectedSize) {
-      showToast("Please select color and size first!");
-      return;
-    }
-    var selectedOption = colorPicker.querySelector("[data-color='" + selectedColor + "']");
-    var cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const btn = e.target.closest("#addToCartBtn");
+
+  if (btn) {
+    const size = document.getElementById("sizeSelect");
+    const picker = document.getElementById("colorPicker");
+    const img = document.getElementById("slipper");
+
+    if (!size || !picker || !img) return;
+
+    const selectedSize = size.value;
+    if (!selectedSize) return;
+
+    const active =
+      picker.querySelector(".color-option.active") ||
+      picker.querySelector(".color-option");
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     cart.push({
       name: "slipper",
-      color: selectedColor,
+      color: active.dataset.color,
       size: selectedSize,
-      image: selectedOption ? selectedOption.dataset.src : "",
-      price: price
+      image: img.src,
+      price: 28
     });
-    localStorage.setItem("cart", JSON.stringify(cart));
-    showToast(selectedColor + " slipper (Size " + selectedSize + ") added to cart!");
-  });
-};
 
-window.initSlipperPage();
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    return;
+  }
+
+}, true);
+
+document.addEventListener("DOMContentLoaded", function () {
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+});
 </script>
 
 <script src="pwa-nav.js"></script>
+
 </body>
 </html>
