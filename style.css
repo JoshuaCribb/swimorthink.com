@@ -130,30 +130,30 @@ footer {
 @media (max-width: 480px) {
 
   .products {
-    grid-template-columns: 1fr; 
-    justify-items: center;     
-    gap: 1rem;
-    padding: 0 8px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 1.5rem;
+    padding: 0 12px;
   }
 
   .product {
-    max-width: 140px;  
+    max-width: 260px;  
     width: 100%;
   }
 
   .item {
     width: 100%;
-    height: auto;            /* THIS was missing */
+    height: auto;
     aspect-ratio: 1 / 1;
   }
 
   .item img {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 95%;
+    max-height: 95%;
   }
 
   .price {
-    font-size: 1.2rem;
-    margin-top: 0.25rem;
+    font-size: 1.4rem;
+    margin-top: 0.4rem;
   }
 }
