@@ -1,15 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/icon16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/iconapple.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/iconapple.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#000000">
+
+  <!-- iOS App Mode -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="swimorthink">
+  <link rel="apple-touch-icon" href="/assets/icon192.png">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>@swimorthink Store</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+
 <header>
   <a href="index.html">
     <img src="assets/logo.gif" alt="@swimorthink logo" class="logo" />
@@ -17,62 +29,60 @@
 
   <div class="header-banner">
     <a href="cart.html">Shopping Cart</a>
-  </div>
-
+    <a id="account-link" href="login.html">Login</a>
   </div>
 </header>
 
-
-
- <main>
-    <a href="slipper.html" class="product-link">
-      <div class="product">
-        <div class="item">
-          <img
-            class="slideshow"
-            src="assets/blackslipper.png"
-            data-images="assets/cremeslipper.png,assets/pinkslipper.png"
-            alt="@swimorthink"
-          />
-        </div>
-        <p class="price">$28</p>
+<main>
+  <a href="slipper.html" class="product-link">
+    <div class="product">
+      <div class="item">
+        <img
+          class="slideshow"
+          src="assets/blackslipper.png"
+          data-images="assets/blackslipper.png,assets/cremeslipper.png,assets/pinkslipper.png"
+          alt="@swimorthink"
+        />
       </div>
-    </a>
-
-  </main>
+      <p class="price">$28</p>
+    </div>
+  </a>
+</main>
 
 <footer>
   <p>© <span id="year"></span>. All Rights Reserved.</p>
 </footer>
 
- <script>
+<script>
+  // ordered slideshow (no random)
   document.querySelectorAll(".slideshow").forEach(img => {
     const images = img.dataset.images.split(",");
+    let index = 0;
 
-    function randomize() {
-      const randomIndex = Math.floor(Math.random() * images.length);
-      img.src = images[randomIndex];
+    function nextImage() {
+      index = (index + 1) % images.length;
+      img.src = images[index];
     }
 
-   
-    randomize();
-
-   
-    setInterval(randomize, 2000);
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-      const isLoggedIn = localStorage.getItem("loggedIn") === "true";
-  const accountLink = document.getElementById("account-link");
-  
-  if (isLoggedIn) {
-    accountLink.textContent = "My Account";
-    accountLink.href = "account.html";
-  } else {
-    accountLink.textContent = "Login";
-    accountLink.href = "login.html";
-  }
-
+    setInterval(nextImage, 2000);
   });
+
+  // set year once
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // account link logic
+  const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+  const accountLink = document.getElementById("account-link");
+
+  if (accountLink) {
+    if (isLoggedIn) {
+      accountLink.textContent = "My Account";
+      accountLink.href = "account.html";
+    } else {
+      accountLink.textContent = "Login";
+      accountLink.href = "login.html";
+    }
+  }
 </script>
 
 </body>

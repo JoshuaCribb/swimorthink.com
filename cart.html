@@ -3,11 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>@swimorthink Cart</title>
+
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/iconapple.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#000000">
+
+  <!-- iOS App Mode -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="swimorthink">
+  <link rel="apple-touch-icon" href="/assets/icon192.png">
+
   <link rel="stylesheet" href="style.css" />
+
   <style>
     .cart-container {
       width: 90%;
@@ -15,6 +29,7 @@
       margin: 2rem auto;
       text-align: center;
     }
+
     .cart-item {
       display: flex;
       align-items: center;
@@ -26,18 +41,22 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       flex-wrap: wrap;
     }
+
     .cart-item img {
       width: 80px;
       height: 80px;
       object-fit: contain;
     }
+
     .cart-item-details {
       flex: 1;
       margin-left: 1rem;
       text-align: left;
       min-width: 150px;
     }
+
     .cart-item-details p { margin: 0.25rem 0; }
+
     .remove-btn {
       background: #ff5555;
       color: #fff;
@@ -47,13 +66,16 @@
       cursor: pointer;
       margin-top: 0.5rem;
     }
+
     .remove-btn:hover { background: #ff2222; }
+
     .cart-total {
       text-align: right;
       font-size: 1.5rem;
       font-weight: bold;
       margin-top: 1rem;
     }
+
     #startCheckoutBtn {
       display: block;
       margin: 1.5rem auto;
@@ -65,7 +87,9 @@
       border-radius: 8px;
       cursor: pointer;
     }
+
     #startCheckoutBtn:hover { background: #5469d4; }
+
     .quantity-input {
       width: 50px;
       padding: 3px 5px;
@@ -74,6 +98,7 @@
       border: 1px solid #ccc;
       text-align: center;
     }
+
     @media (max-width: 480px) {
       .cart-item { flex-direction: column; align-items: flex-start; }
       .cart-item-details { margin-left: 0; margin-top: 0.5rem; }

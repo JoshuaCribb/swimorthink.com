@@ -1,97 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/icon16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/iconapple.png">
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>@swimorthink</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  .picker-container {
-    width: 90%;
-    max-width: 700px;   
-    margin: 0.2rem auto;
-    text-align: center;
-    position: relative;
-    transform: scale(0.85);  
-    transform-origin: top center;
-  }
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/iconapple.png">
 
-  .hat-frame {
-    width: 100%;
-    padding-top: 100%;
-    position: relative;
-    border-radius: 10px;
-    margin-bottom: 0.3rem;
-    background-image: url('assets/picker.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#000000">
 
-  .hat-image {
-    position: absolute;
-    top: 15%;      
-    left: 27%;     
-    width: 55%;    
-    height: 57%;
-    object-fit: contain;
-  }
+  <!-- iOS App Mode -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="swimorthink">
+  <link rel="apple-touch-icon" href="/assets/icon192.png">
 
-  .price {
-    font-size: 1.5rem;
-    margin: 0.3rem 0;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@swimorthink</title>
+  <link rel="stylesheet" href="style.css" />
 
-  .color-picker {
-    display: flex;
-    justify-content: center;
-    gap: 0.4rem;
-    margin-bottom: 0.6rem;
-  }
+  <style>
+    .picker-container {
+      width: 90%;
+      max-width: 700px;   
+      margin: 0.2rem auto;
+      text-align: center;
+      position: relative;
+      transform: scale(0.85);  
+      transform-origin: top center;
+    }
 
-  .color-option {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid #333;
-  }
+    .hat-frame {
+      width: 100%;
+      padding-top: 100%;
+      position: relative;
+      border-radius: 10px;
+      margin-bottom: 0.3rem;
+      background-image: url('assets/picker.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
 
-  .size-picker {
-    margin-bottom: 0.8rem;
-  }
+    .hat-image {
+      position: absolute;
+      top: 15%;      
+      left: 27%;     
+      width: 55%;    
+      height: 57%;
+      object-fit: contain;
+    }
 
-  .size-picker label {
-    font-size: 1rem;
-    margin-right: 0.5rem;
-  }
+    .price {
+      font-size: 1.5rem;
+      margin: 0.3rem 0;
+    }
 
-  .size-select {
-    padding: 0.4rem 0.6rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1px solid #333;
-    background: #fff;
-    cursor: pointer;
-  }
+    .color-picker {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
 
-  #addToCartBtn {
-    padding: 0.8rem 1.5rem;
-    font-size: 1.2rem;
-    background: #6772e5;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
+    .color-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #333;
+    }
 
-  #addToCartBtn:hover {
-    background: #5469d4;
-  }
-</style>
+    .size-picker {
+      margin-bottom: 0.8rem;
+    }
+
+    .size-picker label {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .size-select {
+      padding: 0.4rem 0.6rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    #addToCartBtn {
+      padding: 0.8rem 1.5rem;
+      font-size: 1.2rem;
+      background: #6772e5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #addToCartBtn:hover {
+      background: #5469d4;
+    }
+  </style>
 </head>
 <body>
 <header>
