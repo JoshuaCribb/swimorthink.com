@@ -63,7 +63,7 @@
       </select>
     </div>
 
-    <button id="addToCartBtn">Add to Cart</button>
+    <button id="addToCartBtn">add to cart</button>
 
   </div>
 </main>
@@ -101,7 +101,35 @@ function initSlipperPage() {
   btn.onclick = function () {
 
     const selectedSize = size.value;
-    if (!selectedSize) return;
+
+    // ❗ SIZE VALIDATION
+    if (!selectedSize) {
+
+      const msg = document.createElement("div");
+      msg.textContent = "mou must pick a size";
+
+      msg.style.position = "absolute";
+      const rect = btn.getBoundingClientRect();
+      msg.style.top = (window.scrollY + rect.bottom + 8) + "px";
+      msg.style.left = (rect.left + rect.width / 2) + "px";
+      msg.style.transform = "translateX(-50%)";
+
+      msg.style.background = "#000";
+      msg.style.color = "#fff";
+      msg.style.padding = "10px 16px";
+      msg.style.borderRadius = "8px";
+      msg.style.zIndex = "9999";
+      msg.style.fontSize = "14px";
+      msg.style.whiteSpace = "nowrap";
+
+      document.body.appendChild(msg);
+
+      setTimeout(function () {
+        msg.remove();
+      }, 1200);
+
+      return;
+    }
 
     const active =
       picker.querySelector(".color-option.active") ||
@@ -119,19 +147,23 @@ function initSlipperPage() {
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    // ✅ POPUP MESSAGE
+    // ✅ SUCCESS POPUP
     const msg = document.createElement("div");
-    msg.textContent = "Slipper added to cart";
-    msg.style.position = "fixed";
-    msg.style.bottom = "20px";
-    msg.style.left = "50%";
+    msg.textContent = "added to cart";
+
+    msg.style.position = "absolute";
+    const rect = btn.getBoundingClientRect();
+    msg.style.top = (window.scrollY + rect.bottom + 8) + "px";
+    msg.style.left = (rect.left + rect.width / 2) + "px";
     msg.style.transform = "translateX(-50%)";
+
     msg.style.background = "#000";
     msg.style.color = "#fff";
     msg.style.padding = "10px 16px";
     msg.style.borderRadius = "8px";
     msg.style.zIndex = "9999";
     msg.style.fontSize = "14px";
+    msg.style.whiteSpace = "nowrap";
 
     document.body.appendChild(msg);
 
