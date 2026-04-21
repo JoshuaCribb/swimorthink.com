@@ -77,34 +77,26 @@
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-function initSlipperPage() {
-  console.log("initSlipperPage called, colorPicker:", document.getElementById("colorPicker"));
+window.initSlipperPage = function() {
+  var hatImage = document.getElementById("slipper");
+  var colorPicker = document.getElementById("colorPicker");
+  var addToCartBtn = document.getElementById("addToCartBtn");
+  var sizeSelect = document.getElementById("sizeSelect");
 
-  const hatImage = document.getElementById("slipper");
-  const colorPicker = document.getElementById("colorPicker");
-  const addToCartBtn = document.getElementById("addToCartBtn");
-  const sizeSelect = document.getElementById("sizeSelect");
+  if (!hatImage || !colorPicker || !addToCartBtn || !sizeSelect) return;
 
-  if (!hatImage || !colorPicker || !addToCartBtn || !sizeSelect) {
-    console.log("initSlipperPage: missing elements, bailing out");
-    return;
-  }
-
-  console.log("initSlipperPage: all elements found, attaching listeners");
-
-  let selectedColor = "creme";
-  const price = 28;
+  var selectedColor = "creme";
+  var price = 28;
 
   colorPicker.addEventListener("click", function(e) {
-    const option = e.target.closest(".color-option");
+    var option = e.target.closest(".color-option");
     if (!option) return;
     selectedColor = option.dataset.color;
     hatImage.src = option.dataset.src;
-    console.log("color selected:", selectedColor);
   });
 
   function showToast(message) {
-    const toast = document.createElement("div");
+    var toast = document.createElement("div");
     toast.textContent = message;
     toast.style.position = "fixed";
     toast.style.top = "20px";
@@ -127,15 +119,13 @@ function initSlipperPage() {
   }
 
   addToCartBtn.addEventListener("click", function() {
-    const selectedSize = sizeSelect.value;
-
+    var selectedSize = sizeSelect.value;
     if (!selectedColor || !selectedSize) {
       showToast("Please select color and size first!");
       return;
     }
-
-    const selectedOption = colorPicker.querySelector("[data-color='" + selectedColor + "']");
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    var selectedOption = colorPicker.querySelector("[data-color='" + selectedColor + "']");
+    var cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.push({
       name: "slipper",
       color: selectedColor,
@@ -146,13 +136,9 @@ function initSlipperPage() {
     localStorage.setItem("cart", JSON.stringify(cart));
     showToast(selectedColor + " slipper (Size " + selectedSize + ") added to cart!");
   });
-}
+};
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initSlipperPage);
-} else {
-  initSlipperPage();
-}
+window.initSlipperPage();
 </script>
 
 <script src="pwa-nav.js"></script>

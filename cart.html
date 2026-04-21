@@ -49,8 +49,6 @@
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-var stripe = Stripe("pk_live_51SQdhpQmVjRaXaSguVowcSf46mwucA7RnD5GGG5DUN8j9cdVNssaGvoZZ3fsskSCsGHKT3gIxIIAn23gzppOKYbn0014WgzAjT");
-
 function initCartPage() {
   var cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -59,6 +57,11 @@ function initCartPage() {
   var checkoutBtn = document.getElementById("startCheckoutBtn");
 
   if (!cartItemsContainer || !cartTotalEl || !checkoutBtn) return;
+
+  // Initialize stripe safely inside the function
+  var stripeInstance = (typeof Stripe !== "undefined")
+    ? Stripe("pk_live_51SQdhpQmVjRaXaSguVowcSf46mwucA7RnD5GGG5DUN8j9cdVNssaGvoZZ3fsskSCsGHKT3gIxIIAn23gzppOKYbn0014WgzAjT")
+    : null;
 
   function renderCart() {
     cartItemsContainer.innerHTML = "";
@@ -166,6 +169,11 @@ function initCartPage() {
       return;
     }
 
+    if (!stripeInstance) {
+      alert("Payment system not loaded. Please refresh and try again.");
+      return;
+    }
+
     fetch("/.netlify/functions/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -177,7 +185,7 @@ function initCartPage() {
         alert("Checkout error: " + data.error);
         return;
       }
-      return stripe.redirectToCheckout({ sessionId: data.sessionId });
+      return stripeInstance.redirectToCheckout({ sessionId: data.sessionId });
     })
     .then(function(result) {
       if (result && result.error) {
