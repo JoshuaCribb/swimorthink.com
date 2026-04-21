@@ -1,5 +1,10 @@
 (function () {
 
+  // Detect if running as installed PWA
+  const isStandalone =
+    window.navigator.standalone === true ||
+    window.matchMedia('(display-mode: standalone)').matches;
+
   function loadPage(href) {
     fetch(href)
       .then(r => {
@@ -10,14 +15,10 @@
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
-        // Swap main content
         document.querySelector('main').innerHTML =
           doc.querySelector('main').innerHTML;
 
-        // Swap page title
         document.title = doc.title;
-
-        // Scroll to top on navigation
         window.scrollTo(0, 0);
 
         // Re-run scripts inside <main>
@@ -30,29 +31,27 @@
       .catch(err => console.error('PWA nav error:', err));
   }
 
-  // Intercept all internal link clicks
   document.addEventListener('click', function (e) {
     const link = e.target.closest('a');
     if (!link) return;
-    if (!link.href) return;                                         // no href
-    if (link.target === '_blank') return;                          // new tab links
-    if (link.href.startsWith('mailto:')) return;                   // email links
-    if (link.href.startsWith('tel:')) return;                      // phone links
+    if (!link.href) return;
+    if (link.target === '_blank') return;
+    if (link.href.startsWith('mailto:')) return;
+    if (link.href.startsWith('tel:')) return;
 
-    // GitHub Pages: compare pathnames only, allow relative and absolute
-    const currentPath = location.pathname;
-    const linkPath = new URL(link.href, location.href).pathname;
+    const resolved = new URL(link.href, location.href);
 
-    if (new URL(link.href, location.href).hostname !== location.hostname) return; // external
-    if (linkPath === currentPath) return;                          // same page
+    if (resolved.hostname !== location.hostname) return; // external
+
+    // In standalone PWA mode, ALWAYS intercept internal links
+    // In regular Safari, only intercept if same pathname
+    if (!isStandalone && resolved.pathname === location.pathname) return;
 
     e.preventDefault();
-    const resolvedHref = new URL(link.href, location.href).href;
-    history.pushState({}, '', resolvedHref);
-    loadPage(resolvedHref);
+    history.pushState({}, '', resolved.href);
+    loadPage(resolved.href);
   });
 
-  // Handle browser back/forward
   window.addEventListener('popstate', function () {
     loadPage(location.href);
   });
