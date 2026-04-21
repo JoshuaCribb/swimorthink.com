@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/iconapple.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icon16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/iconapple.png">
 
   <!-- PWA -->
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000">
 
   <!-- iOS App Mode -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="swimorthink">
-  <link rel="apple-touch-icon" href="/assets/icon192.png">
+  <link rel="apple-touch-icon" href="assets/icon192.png">
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -77,65 +77,72 @@
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-const hatImage = document.getElementById("slipper");
-const colorPicker = document.getElementById("colorPicker");
-const addToCartBtn = document.getElementById("addToCartBtn");
-const sizeSelect = document.getElementById("sizeSelect");
+// Slipper page init — runs on direct load AND on PWA navigation
+function initSlipperPage() {
+  const hatImage = document.getElementById("slipper");
+  const colorPicker = document.getElementById("colorPicker");
+  const addToCartBtn = document.getElementById("addToCartBtn");
+  const sizeSelect = document.getElementById("sizeSelect");
 
-let selectedColor = "creme";
-let price = 28;
+  if (!hatImage || !colorPicker || !addToCartBtn || !sizeSelect) return;
 
-function updateHatImage() {
-  const selectedOption = Array.from(colorPicker.children)
-    .find(c => c.dataset.color === selectedColor);
-  if (selectedOption) hatImage.src = selectedOption.dataset.src;
-}
+  let selectedColor = "creme";
+  const price = 28;
 
-colorPicker.querySelectorAll(".color-option").forEach(option => {
-  option.addEventListener("click", () => {
-    selectedColor = option.dataset.color;
-    updateHatImage();
-  });
-});
-
-function showToast(message) {
-  const toast = document.createElement('div');
-  toast.textContent = message;
-  toast.style.cssText = `
-    position:fixed; top:20px; left:50%; transform:translateX(-50%);
-    background:#6772e5; color:#fff; padding:10px 20px;
-    border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2);
-    z-index:1000; opacity:0; transition:opacity 0.3s;
-  `;
-  document.body.appendChild(toast);
-  setTimeout(() => { toast.style.opacity = '1'; }, 50);
-  setTimeout(() => {
-    toast.style.opacity = '0';
-    setTimeout(() => toast.remove(), 300);
-  }, 2000);
-}
-
-addToCartBtn.addEventListener("click", () => {
-  const selectedOption = Array.from(colorPicker.children)
-    .find(c => c.dataset.color === selectedColor);
-  const selectedSize = sizeSelect.value;
-
-  if (!selectedOption || !selectedSize) {
-    showToast("Please select color and size first!");
-    return;
+  function updateHatImage() {
+    const selectedOption = Array.from(colorPicker.children)
+      .find(c => c.dataset.color === selectedColor);
+    if (selectedOption) hatImage.src = selectedOption.dataset.src;
   }
 
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({
-    name: "slipper",
-    color: selectedColor,
-    size: selectedSize,
-    image: selectedOption.dataset.src,
-    price: price
+  colorPicker.querySelectorAll(".color-option").forEach(option => {
+    option.addEventListener("click", () => {
+      selectedColor = option.dataset.color;
+      updateHatImage();
+    });
   });
-  localStorage.setItem("cart", JSON.stringify(cart));
-  showToast(`${selectedColor} slipper (Size ${selectedSize}) added to cart!`);
-});
+
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.cssText = `
+      position:fixed; top:20px; left:50%; transform:translateX(-50%);
+      background:#6772e5; color:#fff; padding:10px 20px;
+      border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2);
+      z-index:1000; opacity:0; transition:opacity 0.3s;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '1'; }, 50);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 2000);
+  }
+
+  addToCartBtn.addEventListener("click", () => {
+    const selectedOption = Array.from(colorPicker.children)
+      .find(c => c.dataset.color === selectedColor);
+    const selectedSize = sizeSelect.value;
+
+    if (!selectedOption || !selectedSize) {
+      showToast("Please select color and size first!");
+      return;
+    }
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({
+      name: "slipper",
+      color: selectedColor,
+      size: selectedSize,
+      image: selectedOption.dataset.src,
+      price: price
+    });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    showToast(`${selectedColor} slipper (Size ${selectedSize}) added to cart!`);
+  });
+}
+
+initSlipperPage();
 </script>
 
 <script src="pwa-nav.js"></script>

@@ -1,9 +1,12 @@
 (function () {
 
-  // Detect if running as installed PWA
   const isStandalone =
     window.navigator.standalone === true ||
     window.matchMedia('(display-mode: standalone)').matches;
+
+  // Get the base path for this GitHub Pages repo
+  // e.g. "/swimorthink.com" from "joshuacribb.github.io/swimorthink.com/"
+  const basePath = location.pathname.split('/').slice(0, 2).join('/');
 
   function loadPage(href) {
     fetch(href)
@@ -41,10 +44,8 @@
 
     const resolved = new URL(link.href, location.href);
 
-    if (resolved.hostname !== location.hostname) return; // external
+    if (resolved.hostname !== location.hostname) return;
 
-    // In standalone PWA mode, ALWAYS intercept internal links
-    // In regular Safari, only intercept if same pathname
     if (!isStandalone && resolved.pathname === location.pathname) return;
 
     e.preventDefault();
