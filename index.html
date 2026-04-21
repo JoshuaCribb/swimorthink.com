@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon16x16.png">
@@ -14,7 +16,7 @@
   <link rel="apple-touch-icon" href="/assets/icon192.png">
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <title>@swimorthink Store</title>
   <link rel="stylesheet" href="style.css" />
@@ -23,17 +25,17 @@
 <body>
 
 <header>
-  <a href="index.html">
+  <a href="/index.html">
     <img src="assets/logo.gif" alt="@swimorthink logo" class="logo" />
   </a>
 
   <div class="header-banner">
-    <a href="cart.html">Shopping Cart</a>
+    <a href="/cart.html">Shopping Cart</a>
   </div>
 </header>
 
 <main>
-  <a href="slipper.html" class="product-link">
+  <a href="/slipper.html" class="product-link">
     <div class="product">
       <div class="item">
         <img
@@ -53,35 +55,17 @@
 </footer>
 
 <script>
-  // ordered slideshow (no random)
-  document.querySelectorAll(".slideshow").forEach(img => {
-    const images = img.dataset.images.split(",");
-    let index = 0;
+document.querySelectorAll(".slideshow").forEach(img => {
+  const images = img.dataset.images.split(",");
+  let index = 0;
 
-    function nextImage() {
-      index = (index + 1) % images.length;
-      img.src = images[index];
-    }
+  setInterval(() => {
+    index = (index + 1) % images.length;
+    img.src = images[index];
+  }, 2000);
+});
 
-    setInterval(nextImage, 2000);
-  });
-
-  // set year once
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // account link logic
-  const isLoggedIn = localStorage.getItem("loggedIn") === "true";
-  const accountLink = document.getElementById("account-link");
-
-  if (accountLink) {
-    if (isLoggedIn) {
-      accountLink.textContent = "My Account";
-      accountLink.href = "account.html";
-    } else {
-      accountLink.textContent = "Login";
-      accountLink.href = "login.html";
-    }
-  }
+document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 </body>
