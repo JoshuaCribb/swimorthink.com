@@ -27,7 +27,7 @@
     <img src="assets/logo.gif" class="logo" alt="@swimorthink logo">
   </a>
   <div class="header-banner">
-    <a href="cart.html">Shopping Cart</a>
+    <a href="cart.html">My Cart</a>
   </div>
 </header>
 
@@ -73,15 +73,21 @@
 </footer>
 
 <script>
-document.addEventListener("click", function (e) {
+function initSlipperPage() {
 
-  const color = e.target.closest(".color-option");
+  const img = document.getElementById("slipper");
+  const picker = document.getElementById("colorPicker");
+  const size = document.getElementById("sizeSelect");
+  const btn = document.getElementById("addToCartBtn");
+  const year = document.getElementById("year");
 
-  if (color) {
-    const img = document.getElementById("slipper");
-    const picker = document.getElementById("colorPicker");
+  if (!img || !picker || !size || !btn) return;
 
-    if (!img || !picker) return;
+  if (year) year.textContent = new Date().getFullYear();
+
+  picker.onclick = function (e) {
+    const color = e.target.closest(".color-option");
+    if (!color) return;
 
     img.src = color.dataset.src;
 
@@ -90,18 +96,9 @@ document.addEventListener("click", function (e) {
     });
 
     color.classList.add("active");
+  };
 
-    return;
-  }
-
-  const btn = e.target.closest("#addToCartBtn");
-
-  if (btn) {
-    const size = document.getElementById("sizeSelect");
-    const picker = document.getElementById("colorPicker");
-    const img = document.getElementById("slipper");
-
-    if (!size || !picker || !img) return;
+  btn.onclick = function () {
 
     const selectedSize = size.value;
     if (!selectedSize) return;
@@ -121,16 +118,12 @@ document.addEventListener("click", function (e) {
     });
 
     localStorage.setItem("cart", JSON.stringify(cart));
+  };
+}
 
-    return;
-  }
-
-}, true);
-
-document.addEventListener("DOMContentLoaded", function () {
-  const y = document.getElementById("year");
-  if (y) y.textContent = new Date().getFullYear();
-});
+document.addEventListener("DOMContentLoaded", initSlipperPage);
+window.addEventListener("pageshow", initSlipperPage);
+window.addEventListener("pwa:ready", initSlipperPage);
 </script>
 
 <script src="pwa-nav.js"></script>
