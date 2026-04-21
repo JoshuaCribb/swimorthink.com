@@ -2,7 +2,10 @@
 
   function loadPage(href) {
     fetch(href)
-      .then(r => r.text())
+      .then(r => {
+        if (!r.ok) throw new Error('Page not found: ' + href);
+        return r.text();
+      })
       .then(html => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
@@ -13,6 +16,9 @@
 
         // Swap page title
         document.title = doc.title;
+
+        // Scroll to top on navigation
+        window.scrollTo(0, 0);
 
         // Re-run scripts inside <main>
         document.querySelectorAll('main script').forEach(oldScript => {
@@ -28,12 +34,22 @@
   document.addEventListener('click', function (e) {
     const link = e.target.closest('a');
     if (!link) return;
-    if (link.hostname !== location.hostname) return; // external, allow
-    if (link.pathname === location.pathname) return;  // same page, skip
+    if (!link.href) return;                                         // no href
+    if (link.target === '_blank') return;                          // new tab links
+    if (link.href.startsWith('mailto:')) return;                   // email links
+    if (link.href.startsWith('tel:')) return;                      // phone links
+
+    // GitHub Pages: compare pathnames only, allow relative and absolute
+    const currentPath = location.pathname;
+    const linkPath = new URL(link.href, location.href).pathname;
+
+    if (new URL(link.href, location.href).hostname !== location.hostname) return; // external
+    if (linkPath === currentPath) return;                          // same page
 
     e.preventDefault();
-    history.pushState({}, '', link.href);
-    loadPage(link.href);
+    const resolvedHref = new URL(link.href, location.href).href;
+    history.pushState({}, '', resolvedHref);
+    loadPage(resolvedHref);
   });
 
   // Handle browser back/forward
