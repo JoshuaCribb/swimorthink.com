@@ -154,3 +154,81 @@ footer {
     font-size: 1.5rem;
   }
 }
+/* Slipper page picker styles */
+.picker-container {
+  width: 90%;
+  max-width: 700px;
+  margin: 0.2rem auto;
+  text-align: center;
+  position: relative;
+  transform: scale(0.85);
+  transform-origin: top center;
+}
+
+.hat-frame {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 0.3rem;
+  background-image: url('assets/picker.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.hat-image {
+  position: absolute;
+  top: 15%;
+  left: 27%;
+  width: 55%;
+  height: 57%;
+  object-fit: contain;
+}
+
+.color-picker {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #333;
+}
+
+.size-picker {
+  margin-bottom: 0.8rem;
+}
+
+.size-picker label {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+.size-select {
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #fff;
+  cursor: pointer;
+}
+
+#addToCartBtn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+  background: #6772e5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#addToCartBtn:hover {
+  background: #5469d4;
+}

@@ -25,17 +25,16 @@
 <body>
 
 <header>
-  <a href="index.html">
+  <a href="/index.html">
     <img src="assets/logo.gif" alt="@swimorthink logo" class="logo" />
   </a>
-
   <div class="header-banner">
     <a href="/cart.html">Shopping Cart</a>
   </div>
 </header>
 
 <main>
-  <a href="slipper.html" class="product-link">
+  <a href="/slipper.html" class="product-link">
     <div class="product">
       <div class="item">
         <img
@@ -58,15 +57,14 @@
 document.querySelectorAll(".slideshow").forEach(img => {
   const images = img.dataset.images.split(",");
   let index = 0;
-
   setInterval(() => {
     index = (index + 1) % images.length;
     img.src = images[index];
   }, 2000);
 });
-
 document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
+<script src="pwa-nav.js"></script>
 </body>
 </html>
