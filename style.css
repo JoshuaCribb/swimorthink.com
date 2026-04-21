@@ -130,22 +130,23 @@ footer {
 @media (max-width: 480px) {
 
   .products {
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 1rem;
-    padding: 0 10px; 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 0 8px;
   }
 
   .item {
     width: 100%;
-    height: auto;
+    aspect-ratio: 1 / 1; 
   }
 
-  .slideshow {
-    width: 100%;
-    height: auto;
+  .item img {
+    max-width: 90%; 
+    max-height: 90%;
   }
 
   .price {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    margin-top: 0.25rem;
   }
 }
