@@ -77,7 +77,6 @@
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Slipper page init — runs on direct load AND on PWA navigation
 function initSlipperPage() {
   const hatImage = document.getElementById("slipper");
   const colorPicker = document.getElementById("colorPicker");
@@ -89,17 +88,12 @@ function initSlipperPage() {
   let selectedColor = "creme";
   const price = 28;
 
-  function updateHatImage() {
-    const selectedOption = Array.from(colorPicker.children)
-      .find(c => c.dataset.color === selectedColor);
-    if (selectedOption) hatImage.src = selectedOption.dataset.src;
-  }
-
-  colorPicker.querySelectorAll(".color-option").forEach(option => {
-    option.addEventListener("click", () => {
-      selectedColor = option.dataset.color;
-      updateHatImage();
-    });
+  // Attach click to each color dot directly
+  colorPicker.addEventListener("click", function(e) {
+    const option = e.target.closest(".color-option");
+    if (!option) return;
+    selectedColor = option.dataset.color;
+    hatImage.src = option.dataset.src;
   });
 
   function showToast(message) {
@@ -120,21 +114,21 @@ function initSlipperPage() {
   }
 
   addToCartBtn.addEventListener("click", () => {
-    const selectedOption = Array.from(colorPicker.children)
-      .find(c => c.dataset.color === selectedColor);
     const selectedSize = sizeSelect.value;
 
-    if (!selectedOption || !selectedSize) {
+    if (!selectedColor || !selectedSize) {
       showToast("Please select color and size first!");
       return;
     }
+
+    const selectedOption = colorPicker.querySelector(`[data-color="${selectedColor}"]`);
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.push({
       name: "slipper",
       color: selectedColor,
       size: selectedSize,
-      image: selectedOption.dataset.src,
+      image: selectedOption ? selectedOption.dataset.src : '',
       price: price
     });
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -142,7 +136,11 @@ function initSlipperPage() {
   });
 }
 
-initSlipperPage();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSlipperPage);
+} else {
+  initSlipperPage();
+}
 </script>
 
 <script src="pwa-nav.js"></script>
