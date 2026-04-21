@@ -83,8 +83,8 @@ main {
 
 .item {
   background: rgba(255, 255, 255, 0);
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,30 +130,22 @@ footer {
 @media (max-width: 480px) {
 
   .products {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 1.5rem;
-    padding: 0 12px;
-  }
-
-  .product {
-    max-width: 260px;  
-    width: 100%;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1rem;
+    padding: 0 10px; 
   }
 
   .item {
     width: 100%;
     height: auto;
-    aspect-ratio: 1 / 1;
   }
 
-  .item img {
-    max-width: 95%;
-    max-height: 95%;
+  .slideshow {
+    width: 100%;
+    height: auto;
   }
 
   .price {
-    font-size: 1.4rem;
-    margin-top: 0.4rem;
+    font-size: 1.5rem;
   }
 }
