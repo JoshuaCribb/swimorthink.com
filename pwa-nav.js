@@ -20,11 +20,9 @@
         document.title = doc.title;
         window.scrollTo(0, 0);
 
-        // Clear any previously defined init functions
         window.initSlipperPage = undefined;
         window.initCartPage = undefined;
 
-        // Re-run scripts inside <main>
         document.querySelectorAll('main script').forEach(function(oldScript) {
           var newScript = document.createElement('script');
           newScript.textContent = oldScript.textContent;
@@ -32,7 +30,6 @@
           document.body.appendChild(newScript);
         });
 
-        // Call init after scripts have had time to define themselves
         setTimeout(function() {
           if (typeof window.initSlipperPage === 'function') {
             window.initSlipperPage();
@@ -42,7 +39,9 @@
           }
         }, 50);
       })
-      .catch(function(err) { console.error('PWA nav error:', err); });
+      .catch(function(err) {
+        console.error('PWA nav error:', err);
+      });
   }
 
   document.addEventListener('click', function (e) {
@@ -60,12 +59,30 @@
 
     e.preventDefault();
 
-    // ✅ FORCE FULL PAGE RELOAD
     window.location.href = resolved.href;
   });
 
   window.addEventListener('popstate', function () {
     loadPage(location.href);
   });
+
+  // ==============================
+  // 📱 FORCE PORTRAIT MODE FALLBACK
+  // ==============================
+  function lockPortrait() {
+    if (window.innerHeight < window.innerWidth) {
+      document.body.style.display = "flex";
+      document.body.style.alignItems = "center";
+      document.body.style.justifyContent = "center";
+      document.body.style.height = "100vh";
+      document.body.innerHTML =
+        "<div style='text-align:center;font-family:sans-serif;padding:20px;'>" +
+        "Please rotate your device to portrait mode" +
+        "</div>";
+    }
+  }
+
+  window.addEventListener("resize", lockPortrait);
+  lockPortrait();
 
 })();
