@@ -66,23 +66,47 @@
     loadPage(location.href);
   });
 
-  // ==============================
-  // 📱 FORCE PORTRAIT MODE FALLBACK
-  // ==============================
-  function lockPortrait() {
-    if (window.innerHeight < window.innerWidth) {
-      document.body.style.display = "flex";
-      document.body.style.alignItems = "center";
-      document.body.style.justifyContent = "center";
-      document.body.style.height = "100vh";
-      document.body.innerHTML =
-        "<div style='text-align:center;font-family:sans-serif;padding:20px;'>" +
-        "Please rotate your device to portrait mode" +
-        "</div>";
+  // ======================================
+  // 📱 STRONG PORTRAIT LOCK (BEST EFFORT)
+  // ======================================
+  function lockOrientation() {
+    const isMobile =
+      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (!isMobile) return;
+
+    const orient =
+      screen.orientation ||
+      screen.mozOrientation ||
+      screen.msOrientation;
+
+    const lockFn =
+      (orient && orient.lock) ||
+      screen.lockOrientation ||
+      screen.mozLockOrientation ||
+      screen.msLockOrientation ||
+      screen.webkitLockOrientation;
+
+    if (lockFn) {
+      try {
+        const result = lockFn.call(orient || screen, "portrait");
+        if (result && result.catch) {
+          result.catch(() => {
+            // some browsers require user gesture, ignore failure
+          });
+        }
+      } catch (e) {
+        // ignore unsupported browsers
+      }
     }
   }
 
-  window.addEventListener("resize", lockPortrait);
-  lockPortrait();
+  // Try immediately
+  lockOrientation();
+
+  // Improve success rate after interaction
+  document.addEventListener("click", function enableLockOnce() {
+    lockOrientation();
+  }, { once: true });
 
 })();
